@@ -4,8 +4,8 @@
  ### Objective
  To understand client-server interactions in a dynamic website, and in particular what operations need to be performed by server-side code
   # The Request include:
-  **1. A URL identifying the target server and resource e.g. an HTML file, a particular data point on the server, or a tool to run**
-  **2. A method that defines the required action The different methods/verbs and their associated actions are listed below**
+  **1. A URL identifying the target server and resource e.g. an HTML file, a particular data point on the server, or a tool to run**.
+  **2. A method that defines the required action The different methods/verbs and their associated actions are listed below**.
  (i)**GET**: Get a specific resource (e.g. an HTML file containing information about a product, or a list of products). 
 (ii)**POST**: Create a new resource (e.g. add a new article to a wiki, add a new contact to a database). 
 (iii)**HEAD**: Get the metadata information about a specific resource without getting the body like GET would.GET request to download the resource if it has changed. 
