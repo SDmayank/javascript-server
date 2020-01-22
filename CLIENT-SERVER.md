@@ -14,12 +14,12 @@
  (vi) **TRACE**, **OPTIONS**, **CONNECT** **PATCH** and many more
  
 ## The Response
- 1.The first line includes the response code 200 OK, which tells us that the request succeeded.
- 2.The 400 Bad Request Error is an HTTP response status code that indicates that the server was unable to process the request sent by the client due to invalid syntax.
- 3.A 404 error is an HTTP status code that means that the page you were trying to reach on a       website couldn't be found on their server.
- 4.A 302 Found message is an HTTP response status code indicating that the requested resource has been temporarily moved to a different URI .
- 5.The 503 Service Unavailable error is an HTTP status code that means the website's server is simply not available right now. Most of the time, it occurs because the server is too busy or because there's maintenance being performed on it.
- 6.The 401 Unauthorized Error is an HTTP response status code indicating that the request sent by the client could not be authenticated. ... Conversely, a 401 Unauthorized Error indicates that the requested resource is restricted and requires authentication, but the client failed to provide any such authentication.
+ 1. The first line includes the response code 200 OK, which tells us that the request succeeded.
+ 2. The 400 Bad Request Error is an HTTP response status code that indicates that the server was unable to process the request sent by the client due to invalid syntax.
+ 3. A 404 error is an HTTP status code that means that the page you were trying to reach on a       website couldn't be found on their server.
+ 4. A 302 Found message is an HTTP response status code indicating that the requested resource has been temporarily moved to a different URI .
+ 5. The 503 Service Unavailable error is an HTTP status code that means the website's server is simply not available right now. Most of the time, it occurs because the server is too busy or because there's maintenance being performed on it.
+ 6. The 401 Unauthorized Error is an HTTP response status code indicating that the request sent by the client could not be authenticated. ... Conversely, a 401 Unauthorized Error indicates that the requested resource is restricted and requires authentication, but the client failed to provide any such authentication.
 
 
 
