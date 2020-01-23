@@ -1,5 +1,5 @@
-var rows = Number(process.argv[2]);
-function Diamond(rows)
+let rows = Number(process.argv[2]);
+function diamondTraingle(rows)
 {
     string = "";
     for(i=1; i<=rows;i++)
@@ -31,4 +31,4 @@ function Diamond(rows)
 
 console.log(string)
 }
-Diamond(rows)
+diamondTraingle(rows)
