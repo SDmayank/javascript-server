@@ -1,4 +1,4 @@
-var rows = Number(process.argv[2]);
+let rows = Number(process.argv[2]);
 
 function eq(rows)
 {
