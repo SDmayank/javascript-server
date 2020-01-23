@@ -1,0 +1,21 @@
+{
+  "name": "javascript-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "diamond" : "node extra/pattern/diamond.js ",
+    "eq" : "node extra/pattern/equilateral.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SDmayank/javascript-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SDmayank/javascript-server/issues"
+  },
+  "homepage": "https://github.com/SDmayank/javascript-server#readme"
+}
