@@ -17,11 +17,11 @@ function diamondTraingle(rows)
     }
     for(i=1; i<=rows;i++)
     {
-        for(space = 1; space <= i; space++)
+        for(space = 2; space <= i; space++)
         {
           string=string + " "
         }
-        for(star = rows-i; star>0; star--)
+        for(star = rows-i; star>=0; star--)
         {
             string=string + "* "  
         }
