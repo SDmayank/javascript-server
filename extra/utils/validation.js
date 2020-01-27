@@ -1,8 +1,3 @@
-
-const v = [];
-const inv = [];
-const valid = [];
-const invalid = [];
 const users = [{
     traineeEmail: "mayank.garg@successive.tech",
     reviewerEmail: "suraj.yadav@successive.tech",
@@ -18,34 +13,37 @@ const users = [{
 
 ];
 
-function validateEmail(arguement) {
-    const regx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((successive.tech))$/;
-    res = regx.test(arguement);
-    if (res == true) 
-    valid.push(arguement);
-    else invalid.push(arguement);
-    return (res);
-}
-
-function validateUsers(users) {
-    users.forEach((mails) => {
-        const { traineeEmail, reviewerEmail } = mails;
-        check = validateEmail(traineeEmail);
-        if (check == true)
-         v.push(1);
-        else inv.push(1);
-        check1 = validateEmail(reviewerEmail);
-        if (check1 == true) v.push(1);
-        else inv.push(1);
+    let validName = [];
+    let invalidName = [];
+    const res = {};
+    const validateEmail = (str) => {
+    let validate = /([a-zA-Z0-9_\-\.]+)@successive[.]tech$/gmi;
+    return validate.test(str);
+    }
+    
+    users.forEach((user) => {
+    let { traineeEmail, reviewerEmail } = user;
+    
+    if (validateEmail(traineeEmail)) {
+    validName.push(traineeEmail)
+    }
+    else {
+    invalidName.push(traineeEmail)
+    }
+    // valid reviewer
+    if (validateEmail(reviewerEmail)) {
+    validName.push(reviewerEmail)
+    } else {
+    invalidName.push(reviewerEmail)
+    }
     })
-
-count = {
-    'vaild users' : v.length,
-    'inavaild users' : inv.length
-}
-}
-validateUsers(users);
-console.log("valid Email", valid);
-//console.log(`Valid Emails is', `$[valid]`);
-console.log("Invlaid Email is \n", invalid);
-console.log(" Count \n" ,count);
+    
+    const counts = {
+    'validInputs': validName.length,
+    'inValidInputs': invalidName.length
+    }
+    res['count'] = counts;
+    res.count = counts;
+    res.users = { invalidName, validName }
+    console.log(res)
+    
