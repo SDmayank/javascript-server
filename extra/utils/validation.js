@@ -34,3 +34,4 @@ function validateEmail(users) {
     console.log(result)
 }
 export default validateEmail
+

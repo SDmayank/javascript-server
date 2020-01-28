@@ -26,3 +26,4 @@ else {
 }
 }
 export default hasPermission
+
