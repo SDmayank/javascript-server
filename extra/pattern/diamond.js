@@ -1,27 +1,27 @@
-let rows = Number(process.argv[2]);
+//let rows = Number(process.argv[2]);
 function diamondTraingle(rows)
 {
-    string = "";
-    for(i=1; i<=rows;i++)
+    let string = "";
+    for(let i=1; i<=rows;i++)
     {
-        for(space=rows-i; space>0; space--)
+        for(let space=rows-i; space>0; space--)
         {
             string = string + " "
         }
-        for(star = 1; star<=i; star++)
+        for(let star = 1; star<=i; star++)
         {
           string=string + "* " 
         }
         string+= "\n"
         
     }
-    for(i=1; i<=rows;i++)
+    for(let i=1; i<=rows;i++)
     {
-        for(space = 1; space <= i; space++)
+        for(let space = 1; space <= i; space++)
         {
           string=string + " "
         }
-        for(star = rows-i; star>0; star--)
+        for(let star = rows-i; star>0; star--)
         {
             string=string + "* "  
         }
@@ -31,4 +31,5 @@ function diamondTraingle(rows)
 
 console.log(string)
 }
-diamondTraingle(rows)
+export default diamondTraingle
+//diamondTraingle(rows)
