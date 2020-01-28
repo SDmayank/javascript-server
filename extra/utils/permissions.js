@@ -1,5 +1,5 @@
 import {permissions} from '../constants'
-import {moduleName,role,permissionType} from '../../extra/index'
+import {moduleName,role,permissionType} from '../../extra'
 function hasPermission(moduleName,role,permissionType) {
     let data = permissions[moduleName];
   

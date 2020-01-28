@@ -1,12 +1,11 @@
-import { checkEmail} from './helper'
+import { checkEmail } from './helper'
 
 let vaild = [];
 let invaild = [];
 const result = {};
 
 function validateEmail(users) {
-       for (let i = 0; i <= users.length - 1; i++)
-       {
+    for (let i = 0; i <= users.length - 1; i++) {
         let { traineeEmail, reviewerEmail } = users[i];
 
         if (checkEmail(traineeEmail)) {
@@ -34,6 +33,4 @@ function validateEmail(users) {
     result.users = { invaild, vaild }
     console.log(result)
 }
-
-
 export default validateEmail
