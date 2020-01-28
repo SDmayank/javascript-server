@@ -1,49 +1,37 @@
-const users = [{
-    traineeEmail: "mayank.garg@successive.tech",
-    reviewerEmail: "suraj.yadav@successive.tech",
-},
-{
-    traineeEmail: "mayank.garg@successive.tech",
-    reviewerEmail: "suraj@successive.tch",
-},
-{
-    traineeEmail: "mayank.ga@successive.tech",
-    reviewerEmail: "yadav@successive.tech",
-},
+import { checkEmail } from './helper'
 
-];
+let vaild = [];
+let invaild = [];
+const result = {};
 
-    let validName = [];
-    let invalidName = [];
-    const res = {};
-    const validateEmail = (str) => {
-    let validate = /([a-zA-Z0-9_\-\.]+)@successive[.]tech$/gmi;
-    return validate.test(str);
+function validateEmail(users) {
+    for (let i = 0; i <= users.length - 1; i++) {
+        let { traineeEmail, reviewerEmail } = users[i];
+
+        if (checkEmail(traineeEmail)) {
+            vaild.push(traineeEmail)
+        }
+        else {
+            invaild.push(traineeEmail)
+        }
+        // valid reviewer
+        if (checkEmail(reviewerEmail)) {
+            vaild.push(reviewerEmail)
+        } else {
+            invaild.push(reviewerEmail)
+        }
     }
-    
-    users.forEach((user) => {
-    let { traineeEmail, reviewerEmail } = user;
-    
-    if (validateEmail(traineeEmail)) {
-    validName.push(traineeEmail)
-    }
-    else {
-    invalidName.push(traineeEmail)
-    }
-    // valid reviewer
-    if (validateEmail(reviewerEmail)) {
-    validName.push(reviewerEmail)
-    } else {
-    invalidName.push(reviewerEmail)
-    }
-    })
-    
+
+
+
     const counts = {
-    'validInputs': validName.length,
-    'inValidInputs': invalidName.length
+        'validInputs': vaild.length,
+        'inValidInputs': invaild.length
     }
-    res['count'] = counts;
-    res.count = counts;
-    res.users = { invalidName, validName }
-    console.log(res)
-    
+    result['count'] = counts;
+    result.count = counts;
+    result.users = { invaild, vaild }
+    console.log(result)
+}
+export default validateEmail
+
