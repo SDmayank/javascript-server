@@ -9,13 +9,13 @@ class Server {
         this.setupRoutes();
         return this;
     }
-    setupRoutes() {
+    setupRoutes(): void {
      this.app.get('/`health-check', ( req: express.Request, res: express.Response) => {
        res.send( 'i am okk' );
     });
     }
-    run() {
-        this.app.listen(this.config.port, ( err ) => {
+    run(): Server {
+        this.app.listen(this.config.port, ( err: any ): any => {
             if ( err ) {
                 console.log(err);
                 throw err;
