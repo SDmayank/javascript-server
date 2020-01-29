@@ -1,15 +1,15 @@
-let rows = Number(process.argv[2]);
+//let rows = Number(process.argv[2]);
 
 function eq(rows)
 {
-    string = "";
-    for(i=1; i<=rows;i++)
+   let string = "";
+    for(let i=1; i<=rows;i++)
     {
-        for(space=rows-i; space>0; space--)
+        for(let space=rows-i; space>0; space--)
         {
             string = string + " "
         }
-        for(star = 1; star<=i; star++)
+        for(let star = 1; star<=i; star++)
         {
           string=string + "* " 
         }
@@ -18,4 +18,5 @@ function eq(rows)
     }
     console.log(string)
     }
-    eq(rows)
+  export default eq
+    //  eq(rows)
