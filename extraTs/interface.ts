@@ -5,7 +5,7 @@ interface IAUTHOR {
     delete: string[];
 }
 interface IGETUSER {
-    getUsers: IAUTHOR;
+    'getUsers': IAUTHOR;
 }
 
 interface IUSER {

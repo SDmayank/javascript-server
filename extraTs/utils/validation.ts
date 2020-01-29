@@ -5,7 +5,8 @@ import { IRESULT, VALIDNAME, ICOUNT } from '../interface';
 const validName: string[] = [];
 const invalidName: string[] = [];
 function validateEmail(): void {
-    for (let i = 0; i <users.length; i++) {
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < users.length; i++) {
         const { traineeEmail, reviewerEmail } = users[i];
 
         if (checkEmail(traineeEmail)) {

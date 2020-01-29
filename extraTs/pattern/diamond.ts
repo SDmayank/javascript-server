@@ -1,6 +1,5 @@
 
-
-function diamondTraingle(rows: number) {
+function diamondTraingle(rows: number): void {
     let string1: string = '';
     for (let i: number = 1; i <= rows; i++) {
         for (let space: number = rows - i; space > 0; space--) {

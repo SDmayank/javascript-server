@@ -1,8 +1,6 @@
 import { permissions } from '../constants';
 import { IAUTHOR, IGETUSER } from '../interface';
-
-
-function hasPermission(moduleName: string, role: string, permissionType: string) {
+function hasPermission(moduleName: string, role: string, permissionType: string): void {
     console.log(permissions[moduleName]);
     const data: IAUTHOR = permissions[moduleName];
     console.log(data);
