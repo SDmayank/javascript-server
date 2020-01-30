@@ -11,7 +11,7 @@ class Server {
     }
     setupRoutes(): void {
      this.app.get('/`health-check', ( req: express.Request, res: express.Response) => {
-       res.send( 'i am okk' );
+       res.send( 'Now app is running on the server' );
     });
     }
     run(): Server {
@@ -20,7 +20,7 @@ class Server {
                 console.log(err);
                 throw err;
             }
-            console.log(`server is running on ${this.config.port}`);
+            console.log(`App is running on ${this.config.port} and ${this.config.env}`);
         });
         return this;
     }
