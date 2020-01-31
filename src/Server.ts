@@ -1,8 +1,9 @@
 import * as express from 'express';
 import Iconfig from './config/Iconfig';
 import * as bodyParser from 'body-parser';
-import { errorHandler, notFoundRoute } from './libs/routes/index';
-import  { Request } from 'express';
+import { errorHandler } from './libs/routes';
+import { notFoundRoute } from './libs/routes';
+import { Request } from 'express';
 import { request } from 'http';
 
 class Server {
@@ -11,14 +12,12 @@ class Server {
         this.app = express();
     }
     bootstrap() {
-        console.log('Inside Bootstrap ');
         this.initBodyParser();
         this.setupRoutes();
         return this;
     }
     initBodyParser() {
         const { app } = this;
-        console.log('inside the init bodyparser');
         app.use(bodyParser.urlencoded({ extended: false }));
         app.use(bodyParser.json());
     }
@@ -35,15 +34,14 @@ class Server {
     setupRoutes() {
         const { app } = this;
         this.app.get('/health-check', (req: express.Request, res: express.Response) => {
-            console.log('inside health check');
             res.send('Now app is running on the server');
         });
-        app.use('/body-parser', ( req: express.Request, res: express.Response) => {
+        app.use('/body-parser', (req: express.Request, res: express.Response) => {
             console.log(req.body);
             res.send('Your body parser is done');
         });
-    app.use(notFoundRoute);
-    app.use(errorHandler);
-}
+        app.use(notFoundRoute);
+        app.use(errorHandler);
+    }
 }
 export default Server;

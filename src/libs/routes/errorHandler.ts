@@ -1,11 +1,17 @@
-const errorHandler = ((err , req , res , next) => {
+const errorHandler = ((err, req, res, next) => {
     console.log('Error', err);
-    res.send(
-        {
-            error : err.error,
-            code : err.code,
-            message : err.error || err.message,
-            timestamp : new Date(),
-        });
+    const { error, code, message } = err;
+    const error1 = {
+        Error: error,
+        status: code,
+        Message: message,
+        timestamp: new Date(),
+        error: error || 'undefined',
+    };
+    res.send(error);
+    if (!res.headerSent) {
+        return next(err);
+    }
+
 });
 export default errorHandler;
