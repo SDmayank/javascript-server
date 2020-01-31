@@ -1,7 +1,7 @@
 import { Request , Response } from 'express';
 
 class TraineeController {
-static instance;
+static instance ;
 static getInstance = () => {
 if ( TraineeController.instance) {
 return TraineeController.instance;
@@ -11,7 +11,7 @@ return TraineeController.instance;
 }
 create = (req: Request , res: Response) => {
     console.log('::::::::Create Trainee:::::::::::::::');
-    res.send({
+    const Traineedata={
         status: 'Done',
         message: 'Trainee Created Successfully',
         data: {
@@ -20,12 +20,13 @@ create = (req: Request , res: Response) => {
             address: 'Faridabad',
 
         }
-    });
+    };
+    res.send(Traineedata);
 }
 
 list = (req: Request , res: Response) => {
     console.log('::::::::Added Trainee:::::::::::::::');
-    res.send({
+    const Traineedata = {
         status: 'Done',
         message: 'Trainee Added Successfully',
         data: [{
@@ -46,26 +47,28 @@ list = (req: Request , res: Response) => {
 
         }]
 
-});
+};
+ res.send(Traineedata);
 }
 
 update = (req: Request , res: Response) => {
     console.log('::::::::Updated Trainee:::::::::::::::');
-    res.send({
+    const Traineedata = {
         status: 'Done',
-        message: 'Trainee Update Successfully',
+        message: 'Trainee Created Successfully',
         data: {
             id: 1673,
             name: 'mayank garg',
             address: 'Faridabad',
 
         }
-    });
+    };
+    res.send(Traineedata);
 }
 
 delete = (req: Request , res: Response) => {
     console.log(':::::::: Delete Trainee:::::::::::::::');
-    res.send({
+    const Traineedata = {
         status: 'Done',
         message: 'Trainee Delete Successfully',
         data: {
@@ -74,7 +77,8 @@ delete = (req: Request , res: Response) => {
             address: 'Faridabad',
 
         }
-    });
+    };
+    res.send( Traineedata );
 }
 }
 
