@@ -5,6 +5,7 @@ import { errorHandler } from './libs/routes';
 import { notFoundRoute } from './libs/routes';
 import { Request } from 'express';
 import { request } from 'http';
+import router from './router';
 
 class Server {
     app: express.Application;
@@ -40,8 +41,9 @@ class Server {
             console.log(req.body);
             res.send('Your body parser is done');
         });
-        app.use(notFoundRoute);
-        app.use(errorHandler);
+        app.use('/api', router);
+        app.use( notFoundRoute );
+        app.use( errorHandler );
     }
 }
 export default Server;
