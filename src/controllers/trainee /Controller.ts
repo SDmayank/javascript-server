@@ -1,4 +1,4 @@
-import { Request , Response } from 'express';
+import { Request , Response , NextFunction } from 'express';
 
 class TraineeController {
 static instance ;
@@ -9,11 +9,12 @@ return TraineeController.instance;
 TraineeController.instance = new TraineeController();
 return TraineeController.instance;
 }
-create = (req: Request , res: Response) => {
+create = (req: Request , res: Response, next: NextFunction) => {
     console.log('::::::::Create Trainee:::::::::::::::');
-    const Traineedata={
+    console.log(  req.body);
+    const Traineedata = {
         status: 'Done',
-        message: 'Trainee Created Successfully',
+        message: 'Trainee Created Successfuly',
         data: {
             id: 1673,
             name: 'mayank garg',
@@ -24,8 +25,9 @@ create = (req: Request , res: Response) => {
     res.send(Traineedata);
 }
 
-list = (req: Request , res: Response) => {
+list = (req: Request , res: Response , next: NextFunction) => {
     console.log('::::::::Added Trainee:::::::::::::::');
+   
     const Traineedata = {
         status: 'Done',
         message: 'Trainee Added Successfully',
@@ -51,8 +53,9 @@ list = (req: Request , res: Response) => {
  res.send(Traineedata);
 }
 
-update = (req: Request , res: Response) => {
+update = (req: Request , res: Response , next: NextFunction) => {
     console.log('::::::::Updated Trainee:::::::::::::::');
+    console.log(  req.body);
     const Traineedata = {
         status: 'Done',
         message: 'Trainee Created Successfully',
@@ -66,9 +69,10 @@ update = (req: Request , res: Response) => {
     res.send(Traineedata);
 }
 
-delete = (req: Request , res: Response) => {
+delete = (req: Request , res: Response , next: NextFunction) => {
     console.log(':::::::: Delete Trainee:::::::::::::::');
-    const Traineedata = {
+    console.log(req.param);
+        const Traineedata = {
         status: 'Done',
         message: 'Trainee Delete Successfully',
         data: {
