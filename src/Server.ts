@@ -5,6 +5,7 @@ import { errorHandler } from './libs/routes';
 import { notFoundRoute } from './libs/routes';
 import { Request } from 'express';
 import { request } from 'http';
+import router from './router';
 
 class Server {
     app: express.Application;
@@ -16,7 +17,7 @@ class Server {
         this.setupRoutes();
         return this;
     }
-    initBodyParser() {
+    initBodyParser(): void {
         const { app } = this;
         app.use(bodyParser.urlencoded({ extended: false }));
         app.use(bodyParser.json());
@@ -40,7 +41,8 @@ class Server {
             console.log(req.body);
             res.send('Your body parser is done');
         });
-        app.use(notFoundRoute);
+        app.use('/api' , router);
+       app.use(notFoundRoute);
         app.use(errorHandler);
     }
 }
