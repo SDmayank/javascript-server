@@ -14,9 +14,7 @@ console.log('key value is', validation[key]);
 console.log('value is', req[location][key]);
 return req[location][key];
 });
-// if (keyData.regex.test('ajay rose')) {
-// const ab = true;
-// }
+
 console.log(values, 'values');
 if ((keyData && keyData.required) && (keyData && keyData.string) && (keyData && keyData.regex && keyData.regex.test(name)) && (keyData && keyData.number) && (keyData && keyData.isObject)) {
 console.log('your string is true');
