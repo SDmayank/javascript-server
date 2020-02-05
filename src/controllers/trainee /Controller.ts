@@ -58,7 +58,7 @@ update = (req: Request , res: Response , next: NextFunction) => {
     console.log(  req.body);
     const Traineedata = {
         status: 'Done',
-        message: 'Trainee Created Successfully',
+        message: 'Trainee updated Successfully',
         data: {
             id: 1673,
             name: 'mayank garg',

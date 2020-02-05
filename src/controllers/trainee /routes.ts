@@ -8,7 +8,7 @@ const traineeRouter = Router();
 
 traineeRouter.route('/')
 .get(validationHandler(validation.get), TraineeController.create)
-.post(authMiddleware('getUsers','read'), validationHandler(validation.create), TraineeController.list)
+.post( validationHandler(validation.create), TraineeController.list)
 .delete(validationHandler(validation.delete),TraineeController.delete)
 .put(validationHandler(validation.update), TraineeController.update);
 traineeRouter.delete('/:id', validationHandler(validation.delete), TraineeController.delete);
