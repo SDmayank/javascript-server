@@ -1,4 +1,4 @@
-//let rows = Number(process.argv[2]);
+
 function diamondTraingle(rows)
 {
     let string = "";
@@ -31,5 +31,4 @@ function diamondTraingle(rows)
 
 console.log(string)
 }
-export default diamondTraingle
-//diamondTraingle(rows)
+export default diamondTraingle;

@@ -33,5 +33,5 @@ function validateEmail(users) {
     result.users = { invaild, vaild }
     console.log(result)
 }
-export default validateEmail
+export default validateEmail;
 

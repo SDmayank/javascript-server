@@ -1,15 +1,15 @@
 
 import { Router } from 'express';
-import TraineeController from './Controller';
+import { default as TraineeController }from './Controller';
 import validationHandler  from '../../libs/routes/validationHandler';
 import { validation } from './validation';
-import Controller from './Controller';
+import authMiddleware from '../../libs/authMiddleware';
 const traineeRouter = Router();
 
 traineeRouter.route('/')
 .get(validationHandler(validation.get), TraineeController.create)
-.post(validationHandler(validation.create), TraineeController.list)
-.delete(TraineeController.delete)
+.post(authMiddleware('getUsers','read'), validationHandler(validation.create), TraineeController.list)
+.delete(validationHandler(validation.delete),TraineeController.delete)
 .put(validationHandler(validation.update), TraineeController.update);
 traineeRouter.delete('/:id', validationHandler(validation.delete), TraineeController.delete);
 export default traineeRouter;
