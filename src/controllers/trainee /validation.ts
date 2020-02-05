@@ -7,8 +7,7 @@ export const validation = {
             in: ['body'],
             custom: ((value) => {
                 console.log('now you are in custom');
-                if (!value)
-                { }
+                if (!value) { }
             })
         },
         name: {
@@ -51,11 +50,11 @@ export const validation = {
             in: ['body'],
             required: true,
             isObject: true,
-            custom: (dataToUpdate) => {{
-                console.log('now you are in custom');
-                if (!dataToUpdate)
-                { };
-            }
+            custom: (dataToUpdate) => {
+                {
+                    console.log('now you are in custom');
+                    if (!dataToUpdate) { };
+                }
             },
         }
     }
