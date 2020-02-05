@@ -1,4 +1,3 @@
-
 import { Router } from 'express';
 import { default as TraineeController }from './Controller';
 import validationHandler  from '../../libs/routes/validationHandler';

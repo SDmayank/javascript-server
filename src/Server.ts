@@ -41,9 +41,9 @@ class Server {
             console.log(req.body);
             res.send('Your body parser is done');
         });
-        app.use('/api' , router);
-       app.use(notFoundRoute);
-        app.use(errorHandler);
+        app.use('/api', router);
+        app.use( notFoundRoute );
+        app.use( errorHandler );
     }
 }
 export default Server;
