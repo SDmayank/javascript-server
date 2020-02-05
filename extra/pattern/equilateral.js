@@ -1,5 +1,3 @@
-//let rows = Number(process.argv[2]);
-
 function eq(rows)
 {
    let string = "";
