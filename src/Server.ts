@@ -6,7 +6,10 @@ import { notFoundRoute } from './libs/routes';
 import { Request } from 'express';
 import { request } from 'http';
 import router from './router';
+import Database from './libs/Database';
+import configuration from './config/configuration';
 
+const { mongoUri } = configuration;
 class Server {
     app: express.Application;
     constructor(private config: Iconfig) {
@@ -23,12 +26,18 @@ class Server {
         app.use(bodyParser.json());
     }
     run(): Server {
-        this.app.listen(this.config.port, (err: any): any => {
-            if (err) {
-                console.log(err);
-                throw err;
-            }
-            console.log(`App is running on ${this.config.port} and ${this.config.env}`);
+        Database.open (mongoUri)
+        .then((msg) => {
+            console.log(msg);
+            this.app.listen(this.config.port, (err: any): any => {
+                if (err) {
+                    console.log(err);
+                    throw err;
+                }
+                console.log(`App is running on ${this.config.port} and ${this.config.env}`);
+            });
+        }).catch((err) => {
+            console.log(err);
         });
         return this;
     }
