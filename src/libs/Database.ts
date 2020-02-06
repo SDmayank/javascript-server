@@ -1,14 +1,13 @@
 import * as Mongoose from 'mongoose';
-import { promises } from 'dns';
-
 class Database {
     static open = (mongoUri: string) => {
         return new Promise((resolve, reject) => {
-            Mongoose.connect(mongoUri, (err) => {
+            Mongoose.connect(mongoUri, { useNewUrlParser: true , useUnifiedTopology: true } , ( err) => {
                 if (err) {
                     console.log('error in mongoDB connection');
                     return reject(err);
                 }
+                console.log(mongoUri);
                 return resolve('Connection Successfull');
             });
         });

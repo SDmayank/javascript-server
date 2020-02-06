@@ -9,7 +9,7 @@ import router from './router';
 import Database from './libs/Database';
 import configuration from './config/configuration';
 
-const { MongoUri } = configuration;
+const { mongoUri } = configuration;
 class Server {
     app: express.Application;
     constructor(private config: Iconfig) {
@@ -26,7 +26,7 @@ class Server {
         app.use(bodyParser.json());
     }
     run(): Server {
-        Database.open (MongoUri)
+        Database.open (mongoUri)
         .then((msg) => {
             console.log(msg);
             this.app.listen(this.config.port, (err: any): any => {
