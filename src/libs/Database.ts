@@ -1,4 +1,5 @@
 import * as Mongoose from 'mongoose';
+import seedData from './seedData'
 class Database {
     static open = (mongoUri: string) => {
         return new Promise((resolve, reject) => {
@@ -8,6 +9,7 @@ class Database {
                     return reject(err);
                 }
                 console.log(mongoUri);
+                seedData();
                 return resolve('Connection Successfull');
             });
         });

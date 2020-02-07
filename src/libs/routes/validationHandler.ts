@@ -1,16 +1,19 @@
+
 export default (config) => {
     return (req, res, next) => {
         console.log(':::::Validation Handler::::::');
-        console.log('config:::::::::::::::::::', config);
-        console.log(req.body);
         Object.keys(config).forEach(key => {
-            console.log(`:::::${key}::::::::`);
+            // console.log('++++++++++++++++++',config);
             const { errorMessage } = config[key];
             const { in: reqType } = config[key];
-            reqType.forEach(reqMethod => {
+             reqType.forEach(reqMethod => {
+                // console.log('************reqtype******',reqType);
+                // console.log('*********reqmethod*********',reqMethod)
                 const keyValue = req[reqMethod][key];
+                console.log("*********" , keyValue);
                 if (config[key].required === true) {
-                    if (keyValue === undefined || keyValue === null) {
+                    if (keyValue === undefined && keyValue === null) {
+                        console.log("**********" , keyValue);
                         const keys = config[key];
                         console.log('----keys---', keys, keyValue);
                         return next({ error: 'error occured', message: `please enter ${key}` });
@@ -22,13 +25,34 @@ export default (config) => {
                             return next({ error: 'error occured', message: `${key}` + 'is invalid' });
                         }
                     }
+                  
+                }
+                
+                
+                if (config[key].isObject && typeof req[reqMethod][key] !== 'object') {
+                    return next({ error: 'error occured', message: 'please enter object type' });
+                }
+                if (config[key].string === true) {
+                    if (typeof(keyValue) !== 'string') {
+                        return next({ error: 'error occured', message: `${key}` + 'is invalid' });
+                    }
+                }
+                if (config[key].number) {
+
+                    if (typeof keyValue !== 'number') {
+                        return next({ error: 'error occured', message: `${key}` + 'is invalid' });
+                    }
+                }
+                if (config[key].array)
+                {
+
+                    if ( keyValue.isArray) {
+                        return next({ error: 'error occured', message: `${key}` + 'is invalid' });
+                    }
                 }
                 if (config[key].custom) {
                     config[key].custom(req[reqMethod][key]);
 
-                }
-                if (config[key].isObject && typeof req[reqMethod][key] !== 'object') {
-                    return next({ error: 'error occured', message: 'please enter object type' });
                 }
             });
         });
