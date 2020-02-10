@@ -3,15 +3,6 @@ import { truncate } from "fs";
 export const validation = {
     create:
     {
-        // id: {
-        //     required: true,
-        //     string: true,
-        //     in: ['body'],
-        //     custom: ((value) => {
-        //         console.log('now you are in custom');
-        //         if (!value) { }
-        //     })
-        // },
         name: {
             required: true,
             regex: '([a-zA-Z])+ ?([a-zA-Z])+$',

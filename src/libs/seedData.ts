@@ -21,5 +21,5 @@ return userRepository.create(user)
 }
 console.log('user already exist');
 
-})
+});
 };
