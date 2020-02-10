@@ -4,7 +4,7 @@ import IUserModel from './IUserModel';
 import IUserCreate from './entities/IUserCreate';
 
 class UserRepository {
-    private userModel: mongoose.Model<IUserModel>
+    private userModel: mongoose.Model<IUserModel>;
     constructor() {
         this.userModel = userModel;
     }

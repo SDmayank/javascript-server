@@ -28,7 +28,7 @@ class UserController {
                     throw error;
                 });
         } catch (err) {
-            return next({ error: err, message: err })
+            return next({ error: err, message: err });
         }
     }
     list = (req: Request, res: Response, next: NextFunction) => {
@@ -42,7 +42,7 @@ class UserController {
             });
         }
         catch (err) {
-            return next({ error: err, message: err })
+            return next({ error: err, message: err });
         }
     }
     update = (req: Request, res: Response, next: NextFunction) => {
@@ -61,7 +61,7 @@ class UserController {
             });
         }
         catch (err) {
-            return next({ error: err, message: err })
+            return next({ error: err, message: err });
         }
     }
     delete = (req: Request, res: Response, next: NextFunction) => {
@@ -76,7 +76,7 @@ class UserController {
             });
         }
         catch (err) {
-            return next({ error: err, message: err })
+            return next({ error: err, message: err });
         }
     };
 }

@@ -26,19 +26,19 @@ class Server {
         app.use(bodyParser.json());
     }
     run(): Server {
-        Database.open (mongoUri)
-        .then((msg) => {
-            console.log(msg);
-            this.app.listen(this.config.port, (err: any): any => {
-                if (err) {
-                    console.log(err);
-                    throw err;
-                }
-                console.log(`App is running on ${this.config.port} and ${this.config.env}`);
+        Database.open(mongoUri)
+            .then((msg) => {
+                console.log(msg);
+                this.app.listen(this.config.port, (err: any): any => {
+                    if (err) {
+                        console.log(err);
+                        throw err;
+                    }
+                    console.log(`App is running on ${this.config.port} and ${this.config.env}`);
+                });
+            }).catch((err) => {
+                console.log(err);
             });
-        }).catch((err) => {
-            console.log(err);
-        });
         return this;
     }
     setupRoutes() {
@@ -51,8 +51,8 @@ class Server {
             res.send('Your body parser is done');
         });
         app.use('/api', router);
-        app.use( notFoundRoute );
-        app.use( errorHandler );
+        app.use(notFoundRoute);
+        app.use(errorHandler);
     }
 }
 export default Server;
