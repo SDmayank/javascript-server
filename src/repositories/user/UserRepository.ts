@@ -16,18 +16,15 @@ class UserRepository {
     }
     findOne = (data) => {
         return this.userModel.findById(data);
-        }
-        
-        update = (id, data) => {
+    }
+    update = (id, data) => {
         return this.userModel.updateOne(id, data);
-        }
-        
-        list = () => {
+    }
+    list = () => {
         return this.userModel.find();
-        }
-        
-        delete = (id) => {
+    }
+    delete = (id) => {
         return this.userModel.findByIdAndDelete(id);
-        }
+    }
 }
 export default UserRepository;

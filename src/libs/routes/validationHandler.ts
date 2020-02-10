@@ -7,13 +7,9 @@ export default (config) => {
             const { errorMessage } = config[key];
             const { in: reqType } = config[key];
              reqType.forEach(reqMethod => {
-                // console.log('************reqtype******',reqType);
-                // console.log('*********reqmethod*********',reqMethod)
                 const keyValue = req[reqMethod][key];
-                console.log("*********" , keyValue);
                 if (config[key].required === true) {
                     if (keyValue === undefined && keyValue === null) {
-                        console.log("**********" , keyValue);
                         const keys = config[key];
                         console.log('----keys---', keys, keyValue);
                         return next({ error: 'error occured', message: `please enter ${key}` });
@@ -25,10 +21,7 @@ export default (config) => {
                             return next({ error: 'error occured', message: `${key}` + 'is invalid' });
                         }
                     }
-                  
                 }
-                
-                
                 if (config[key].isObject && typeof req[reqMethod][key] !== 'object') {
                     return next({ error: 'error occured', message: 'please enter object type' });
                 }
@@ -43,10 +36,9 @@ export default (config) => {
                         return next({ error: 'error occured', message: `${key}` + 'is invalid' });
                     }
                 }
-                if (config[key].array)
-                {
+                if (config[key].array) {
 
-                    if ( keyValue.isArray) {
+                    if (! keyValue.isArray) {
                         return next({ error: 'error occured', message: `${key}` + 'is invalid' });
                     }
                 }
