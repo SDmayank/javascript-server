@@ -1,29 +1,59 @@
+import { truncate } from "fs";
+
 export const validation = {
     create:
     {
-        id: {
-            required: true,
-            string: true,
-            in: ['body'],
-            custom: ((value) => {
-                console.log('now you are in custom');
-                if (!value) {
-                   console.log('id is required');
-                 }
-            })
-        },
         name: {
             required: true,
             regex: '([a-zA-Z])+ ?([a-zA-Z])+$',
             in: ['body'],
             errorMessage: 'Name is required',
+        },
+        address: {
+            required: true,
+            string: true,
+            in: ['body'],
+            errorMessage: 'address is required',
+        },
+        mobileNumber: {
+            required: true,
+            number: true,
+            in: ['body'],
+            errorMessage: 'mobile number required',
+        },
+        role: {
+            required: true,
+            string: true,
+            in: ['body'],
+            errorMessage: 'Please enter role'
+
+        },
+        dob: {
+            required: true,
+            string: true,
+            in: ['body'],
+            errorMessage: 'DOB is required',
+        },
+        email: {
+            required: true,
+            string: true,
+            in: ['body'],
+            errorMessage: 'email is required',
+        },
+        hobby: {
+            required: true,
+            array: 'string',
+            in: ['body'],
+            errorMessage: 'hobby is required',
+
         }
+
     },
     delete: {
         id: {
             required: true,
             errorMessage: 'Id is required',
-            in: ['params']
+            in: ['params'],
         }
     },
     get: {
@@ -55,9 +85,7 @@ export const validation = {
             custom: (dataToUpdate) => {
                 {
                     console.log('now you are in custom');
-                    if (!dataToUpdate) {
-                        console.log( 'object is invalid');
-                    }
+                    if (!dataToUpdate) { };
                 }
             },
         }

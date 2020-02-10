@@ -71,7 +71,6 @@ update = (req: Request , res: Response , next: NextFunction) => {
 
 delete = (req: Request , res: Response , next: NextFunction) => {
     console.log(':::::::: Delete Trainee:::::::::::::::');
-    //console.log(req.params.id);
         const Traineedata = {
         status: 'Done',
         message: 'Trainee Delete Successfully',
