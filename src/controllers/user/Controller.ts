@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import UserRepository from '../../repositories/user/UserRepository';
 import SystemResponse from '../../libs/SystemResponse';
+import IRequest from '../../libs/routes/IRequest'
 
 class UserController {
   static instance: UserController;
@@ -64,7 +65,10 @@ class UserController {
       return next({ error: err, message: err });
     }
   }
-  delete = (req: Request, res: Response, next: NextFunction) => {
+  me = ( req: IRequest , res: Response , next: NextFunction) => {
+    res.send(req.user);
+  }
+  delete = (req: IRequest, res: Response, next: NextFunction) => {
     try {
       console.log(' :::::::::: Inside Delete Trainee :::::::: ');
       const { id } = req.params;

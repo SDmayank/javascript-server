@@ -12,8 +12,6 @@ userRouter.route('/')
   .put(authMiddleware('getUsers', 'read'), validationHandler(validation.update), UserController.update);
 userRouter.delete('/:id', validationHandler(validation.delete), UserController.delete);
 userRouter.route('/me')
-  .get(authMiddleware('getUsers', 'read'), (req: IRequest, res) => {
-    console.log('Inside routes', req.user);
-    res.send(req.user);
-  });
+  .get(authMiddleware('getUsers', 'read'), UserController.me );
 export default userRouter;
+ 

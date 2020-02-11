@@ -32,16 +32,18 @@ export default (moduleName, permissionType) => (req: IRequest, res: Response, ne
     Userrepository.findone({ _id: id, email })
       .then(user => {
         console.log('user details', user);
-        if (!user) {
-          return next({
-            status: 404,
-            error: 'invalid user',
-            message: 'user not found',
-          });
-        }
+       
         req.user = user;
         console.log('req user', req.user);
-      }).then(() => {
+      }).
+      catch( (error) =>  {
+        return next({
+          status: 404,
+          error: 'invalid user',
+          message: 'user not found',
+        });
+      }).
+      then(() => {
         if (!hasPermission(moduleName, role, permissionType)) {
           return next(
             {
