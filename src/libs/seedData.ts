@@ -8,7 +8,7 @@ export default () => {
        dob: new Date('12-12-2020'),
         email: 'vinay@chaudhary.com',
         mobileNumber: 9454737763,
-        hobbies: ['']
+        hobbies: ['touring']
 
     };
 userRepository.count().then((count) => {
