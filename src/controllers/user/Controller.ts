@@ -18,10 +18,10 @@ class UserController {
     try {
       console.log('::::::::Create Trainee USER:::::::::::::::');
 
-      const { email, name, address, hobby, dob, mobileNumber } = req.body;
+      const { email, name, address, hobbies, dob, mobileNumber } = req.body;
 
       this.userRepository.create({
-        email, name, address, dob, mobileNumber, hobby
+        email, name, address, dob, mobileNumber, hobbies
       })
         .then(user => {
           return SystemResponse.success(res, user, 'trainee added sucessfully');
