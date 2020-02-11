@@ -9,9 +9,7 @@ import IRequest from './routes/IRequest';
 export default (moduleName, permissionType) => (req: IRequest, res: Response, next: NextFunction) => {
 
   try {
-
     const Userrepository = new UserRepository();
-
     console.log(':::::::::::AUTHMIDDLEWARE::::::::::::', module, permissionType);
     console.log('-------headers-----', req.headers);
     const { authorization: token } = req.headers;
@@ -27,7 +25,6 @@ export default (moduleName, permissionType) => (req: IRequest, res: Response, ne
         }
       );
     }
-
     const role: string = decodedUser.role;
     console.log('role', role);
     const { id, email } = decodedUser;
@@ -55,8 +52,6 @@ export default (moduleName, permissionType) => (req: IRequest, res: Response, ne
         }
         next();
       });
-
-
   }
   catch (error) {
     return next(
