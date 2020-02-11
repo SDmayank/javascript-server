@@ -14,4 +14,3 @@ userRouter.delete('/:id', validationHandler(validation.delete), UserController.d
 userRouter.route('/me')
   .get(authMiddleware('getUsers', 'read'), UserController.me );
 export default userRouter;
- 
