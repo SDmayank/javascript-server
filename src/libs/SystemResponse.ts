@@ -1,7 +1,7 @@
 class SystemResponse {
     static success = ( res , data , message = 'success') => {
     return res.status(200).send({
-    static : 'ok',
+    status : '200',
     message,
     data
 });
