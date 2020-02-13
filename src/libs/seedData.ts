@@ -5,7 +5,7 @@ export default () => {
     const user = {
         name: 'head trainer',
         address: 'noida',
-       dob: new Date('12-12-2020'),
+        dob: new Date('12-12-2020'),
         email: 'vinay@chaudhary.com',
         mobileNumber: 9454737763,
         hobbies: ['touring']
