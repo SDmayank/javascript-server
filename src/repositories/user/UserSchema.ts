@@ -1,18 +1,20 @@
-
+import VersionableSchema from '../versionable/VersionableSchema';
 import * as mongoose from 'mongoose';
+import { stringify } from 'querystring';
 
-class UserSchema extends mongoose.Schema {
+class UserSchema extends VersionableSchema {
   constructor(options) {
 
     const userSchema = {
 
-      id: String,
+      _id: String,
       name: String,
       address: String,
       email: String,
       dob: Date,
       mobileNumber: Number,
-      hobbies: [String]
+      hobbies: [String],
+      role: String
     };
     super(userSchema, options);
   }

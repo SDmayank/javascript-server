@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import UserRepository from '../../repositories/user/UserRepository';
 import SystemResponse from '../../libs/SystemResponse';
-import IRequest from '../../libs/routes/IRequest'
+import IRequest from '../../libs/routes/IRequest';
 
 class UserController {
   static instance: UserController;
@@ -18,10 +18,10 @@ class UserController {
     try {
       console.log('::::::::Create Trainee USER:::::::::::::::');
 
-      const { email, name, address, hobbies, dob, mobileNumber } = req.body;
+      const { email, name, address, hobbies, dob, mobileNumber, role } = req.body;
 
       this.userRepository.create({
-        email, name, address, dob, mobileNumber, hobbies
+        email, name, address, dob, mobileNumber, hobbies, role
       })
         .then(user => {
           return SystemResponse.success(res, user, 'trainee added sucessfully');
@@ -35,7 +35,7 @@ class UserController {
   list = (req: Request, res: Response, next: NextFunction) => {
     try {
       console.log(' :::::::::: Inside List Trainee :::::::: ');
-      this.userRepository.list().then(user => {
+      this.userRepository.list({deletedAt: undefined }).then(user => {
         console.log(user);
         return SystemResponse.success(res, user, 'Users List');
       }).catch(error => {
@@ -50,13 +50,14 @@ class UserController {
     try {
       console.log(' :::::::::: Inside Update Trainee :::::::: ');
       const { id, dataToUpdate } = req.body;
-      this.userRepository.update({ _id: id }, dataToUpdate).then(User => {
-        this.userRepository.findone({ _id: id })
-          .then(user => {
-            return SystemResponse.success(res, user, 'Updated user');
-          }).catch(error => {
-            throw error;
-          });
+      this.userRepository.update({ _id: id }, dataToUpdate).then(user => {
+        // this.userRepository.findone({ _id: id })
+        //   .then(user => {
+        //     return SystemResponse.success(res, user, 'Updated user');
+        //   }).catch(error => {
+        //     throw error;
+        //   });
+        return SystemResponse.success(res, user, 'Updated user');
       }).catch(error => {
         throw error;
       });

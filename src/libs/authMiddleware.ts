@@ -32,7 +32,6 @@ export default (moduleName, permissionType) => (req: IRequest, res: Response, ne
     Userrepository.findone({ _id: id, email })
       .then(user => {
         console.log('user details', user);
-       
         req.user = user;
         console.log('req user', req.user);
       }).

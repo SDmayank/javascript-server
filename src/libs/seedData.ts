@@ -3,12 +3,13 @@ const userRepository = new UserRepository();
 
 export default () => {
     const user = {
-        name: 'head trainer',
+        name: 'vinay',
         address: 'noida',
         dob: new Date('12-12-2020'),
         email: 'vinay@chaudhary.com',
         mobileNumber: 9454737763,
-        hobbies: ['touring']
+        hobbies: ['touring'],
+        role: 'head trainer'
 
     };
 userRepository.count().then((count) => {
