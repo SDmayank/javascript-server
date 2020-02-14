@@ -10,12 +10,13 @@ export default (moduleName, permissionType) => (req: IRequest, res: Response, ne
 
   try {
     const Userrepository = new UserRepository();
-    console.log(':::::::::::AUTHMIDDLEWARE::::::::::::', module, permissionType);
+    console.log(':::::::::::AUTHMIDDLEWARE::::::::::::', permissionType);
     console.log('-------headers-----', req.headers);
     const { authorization: token } = req.headers;
     const { secretKey } = configuration;
     console.log('-------secretKey-----', secretKey, configuration);
     const decodedUser = jwt.verify(token, secretKey);
+    console.log('decodedUser', decodedUser);
     if (!decodedUser) {
       return next(
         {
@@ -57,7 +58,7 @@ export default (moduleName, permissionType) => (req: IRequest, res: Response, ne
   catch (error) {
     return next(
       {
-        status: 4003,
+        status: 403,
         error: 'unauthorized Access',
         message: error.message
       }

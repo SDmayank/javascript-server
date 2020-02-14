@@ -16,13 +16,13 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     return await this.modelTypes.countDocuments();
   }
 
-  public async create(options): Promise<D> {
+  public async create(options, userID): Promise<D> {
     const id = VersionableRepository.generateObjectId();
     return await this.modelTypes.create({
       ...options,
       _id: id,
-      originalID: id,
-      createdBy: id
+      originalid: id,
+      createdBy: userID._id
     });
   }
 
@@ -30,40 +30,33 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     return await this.modelTypes.findOne(options);
   }
 
-  public async update(id, data) {
+  public async update(id, data, userID) {
 
-    await this.modelTypes.findById(id).then(user => {
-      console.log(typeof user);
-      console.log(typeof data);
-      const updateData = Object.assign(user, data);
-      // console.log(merged);
-      // console.log(updateData);
-      this.updateAndCreate(user);
-    }).catch(error => {
-      throw error;
-    });
-    return await this.modelTypes.update(id, { deletedBy: id, deletedAt: new Date() });
-  }
-
-  public async updateAndCreate(options) {
-    console.log(options);
-    const id = VersionableRepository.generateObjectId();
+    const user = await this.modelTypes.findById(id);
+    console.log(typeof user);
+    console.log(typeof data);
+    Object.assign(user, data);
+    // console.log("gffghfgfgg",user);
     const newObj = {
-      ...options.toObject(),
+      ...user.toObject(),
       _id: id,
-      createdBy: id,
+      createdBy: userID._id,
       updatedAt: new Date(),
-      updatedBy: id,
+      updatedBy: userID._id,
     };
-    console.log(newObj);
-    return await this.modelTypes.create(newObj);
+    // console.log("newasdsadasda", newObj);
+    this.create(newObj, userID);
+    return await this.modelTypes.update(id, { deletedBy: userID._id, deletedAt: new Date() });
   }
-
-  public async delete(id) {
-    return await this.modelTypes.update(id, { deletedBy: id, deletedAt: new Date() });
+  public async delete(id, userID) {
+    return await this.modelTypes.update(id, { deletedBy: userID._id, deletedAt: new Date() });
   }
 
   public async list(data): Promise<any> {
+    const deletedAt = {
+      deletedAt: undefined
+    };
+    Object.assign(data , deletedAt);
     return this.modelTypes.find(data);
   }
 

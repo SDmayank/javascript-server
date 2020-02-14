@@ -1,5 +1,9 @@
 import UserRepository from '../repositories/user/UserRepository';
+import * as mongoose  from 'mongoose';
 const userRepository = new UserRepository();
+// function genertayeObjectId() {
+//   return String (mongoose.Types.ObjectId());
+// }
 
 export default () => {
     const user = {
@@ -15,7 +19,8 @@ export default () => {
 userRepository.count().then((count) => {
     console.log('count as user', count);
     if (!count) {
-return userRepository.create(user)
+      const id = undefined;
+      return userRepository.create(user, {_id: id})
     .then((res) => {
       console.log('user added successfully' , res);
     });

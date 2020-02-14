@@ -14,7 +14,7 @@ class UserController {
     UserController.instance = new UserController();
     return UserController.instance;
   }
-  create = (req: Request, res: Response, next: NextFunction) => {
+  create = (req: IRequest, res: Response, next: NextFunction) => {
     try {
       console.log('::::::::Create Trainee USER:::::::::::::::');
 
@@ -22,7 +22,7 @@ class UserController {
 
       this.userRepository.create({
         email, name, address, dob, mobileNumber, hobbies, role
-      })
+      }, req.user)
         .then(user => {
           return SystemResponse.success(res, user, 'trainee added sucessfully');
         }).catch(error => {
@@ -35,7 +35,7 @@ class UserController {
   list = (req: Request, res: Response, next: NextFunction) => {
     try {
       console.log(' :::::::::: Inside List Trainee :::::::: ');
-      this.userRepository.list({deletedAt: undefined }).then(user => {
+      this.userRepository.list({ deletedAt: undefined }).then(user => {
         console.log(user);
         return SystemResponse.success(res, user, 'Users List');
       }).catch(error => {
@@ -46,17 +46,11 @@ class UserController {
       return next({ error: err, message: err });
     }
   }
-  update = (req: Request, res: Response, next: NextFunction) => {
+  update = (req: IRequest, res: Response, next: NextFunction) => {
     try {
       console.log(' :::::::::: Inside Update Trainee :::::::: ');
       const { id, dataToUpdate } = req.body;
-      this.userRepository.update({ _id: id }, dataToUpdate).then(user => {
-        // this.userRepository.findone({ _id: id })
-        //   .then(user => {
-        //     return SystemResponse.success(res, user, 'Updated user');
-        //   }).catch(error => {
-        //     throw error;
-        //   });
+      this.userRepository.update({ _id: id }, dataToUpdate, req.user).then(user => {
         return SystemResponse.success(res, user, 'Updated user');
       }).catch(error => {
         throw error;
@@ -66,7 +60,7 @@ class UserController {
       return next({ error: err, message: err });
     }
   }
-  me = ( req: IRequest , res: Response , next: NextFunction) => {
+  me = (req: IRequest, res: Response, next: NextFunction) => {
     res.send(req.user);
   }
   delete = (req: IRequest, res: Response, next: NextFunction) => {
@@ -74,7 +68,7 @@ class UserController {
       console.log(' :::::::::: Inside Delete Trainee :::::::: ');
       const { id } = req.params;
       console.log('*****id***', id);
-      this.userRepository.delete({ _id: id }).then(user => {
+      this.userRepository.delete({ _id: id }, req.user).then(user => {
         console.log('*********8', user);
         return SystemResponse.success(res, user, 'Users List');
       }).catch(error => {

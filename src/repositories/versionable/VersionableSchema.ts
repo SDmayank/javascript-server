@@ -12,7 +12,7 @@ export default class VersionableSchema extends mongoose.Schema {
       deletedBy: String,
       createdBy: String,
       updatedBy: String,
-      originalID: String
+      originalid: String
 
     };
 
