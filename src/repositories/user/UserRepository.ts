@@ -9,7 +9,7 @@ export class UserRepository extends VersionableRepository<IUserModel, mongoose.M
     super(userModel);
     this.usermodel = userModel;
   }
-  create = (data: any, userID): Promise<IUserModel> => {
+  create = (data: any, userID = undefined): Promise<IUserModel> => {
     return super.create(data, userID);
   }
   count = () => {

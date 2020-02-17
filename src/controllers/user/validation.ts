@@ -1,5 +1,3 @@
-import { truncate } from "fs";
-
 export const validation = {
     create:
     {
@@ -40,7 +38,7 @@ export const validation = {
             in: ['body'],
             errorMessage: 'email is required',
         },
-        hobby: {
+        hobbies: {
             required: true,
             array: 'string',
             in: ['body'],
@@ -85,7 +83,9 @@ export const validation = {
             custom: (dataToUpdate) => {
                 {
                     console.log('now you are in custom');
-                    if (!dataToUpdate) { };
+                    if (!dataToUpdate) {
+                      console.log('now you are in custom');
+                    }
                 }
             },
         }

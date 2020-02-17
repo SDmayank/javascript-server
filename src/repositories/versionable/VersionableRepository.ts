@@ -1,5 +1,4 @@
 import * as mongoose from 'mongoose';
-import IRequest from './../../libs/routes/IRequest';
 
 export default class VersionableRepository<D extends mongoose.Document, M extends mongoose.Model<D>> {
   private modelTypes: M;
@@ -22,7 +21,7 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
       ...options,
       _id: id,
       originalid: id,
-      createdBy: userID._id
+      createdBy: userID
     });
   }
 
@@ -36,20 +35,18 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     console.log(typeof user);
     console.log(typeof data);
     Object.assign(user, data);
-    // console.log("gffghfgfgg",user);
     const newObj = {
       ...user.toObject(),
       _id: id,
-      createdBy: userID._id,
+      createdBy: userID,
       updatedAt: new Date(),
-      updatedBy: userID._id,
+      updatedBy: userID
     };
-    // console.log("newasdsadasda", newObj);
     this.create(newObj, userID);
-    return await this.modelTypes.update(id, { deletedBy: userID._id, deletedAt: new Date() });
+    return await this.modelTypes.update(id, { deletedBy: userID, deletedAt: new Date() });
   }
   public async delete(id, userID) {
-    return await this.modelTypes.update(id, { deletedBy: userID._id, deletedAt: new Date() });
+    return await this.modelTypes.update(id, { deletedBy: userID, deletedAt: new Date() });
   }
 
   public async list(data): Promise<any> {

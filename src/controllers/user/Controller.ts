@@ -22,7 +22,7 @@ class UserController {
 
       this.userRepository.create({
         email, name, address, dob, mobileNumber, hobbies, role
-      }, req.user)
+      }, req.user._id)
         .then(user => {
           return SystemResponse.success(res, user, 'trainee added sucessfully');
         }).catch(error => {
@@ -50,7 +50,8 @@ class UserController {
     try {
       console.log(' :::::::::: Inside Update Trainee :::::::: ');
       const { id, dataToUpdate } = req.body;
-      this.userRepository.update({ _id: id }, dataToUpdate, req.user).then(user => {
+      this.userRepository.update({ _id: id }, dataToUpdate, req.user._id).then(user => {
+      console.log("********", req.user._id)
         return SystemResponse.success(res, user, 'Updated user');
       }).catch(error => {
         throw error;
@@ -68,8 +69,8 @@ class UserController {
       console.log(' :::::::::: Inside Delete Trainee :::::::: ');
       const { id } = req.params;
       console.log('*****id***', id);
-      this.userRepository.delete({ _id: id }, req.user).then(user => {
-        console.log('*********8', user);
+      this.userRepository.delete({ _id: id }, req.user._id).then(user => {
+        console.log('*********8', req.user._id);
         return SystemResponse.success(res, user, 'Users List');
       }).catch(error => {
         throw error;
