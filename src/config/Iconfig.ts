@@ -3,4 +3,5 @@ export default interface Iconfig {
    env: string;
    secretKey: string;
    mongoUri: string;
+   password: string;
 }

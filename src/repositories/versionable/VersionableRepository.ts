@@ -30,7 +30,6 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
   }
 
   public async update(id, data, userID) {
-
     const user = await this.modelTypes.findById(id);
     console.log(typeof user);
     console.log(typeof data);
@@ -42,6 +41,7 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
       updatedAt: new Date(),
       updatedBy: userID
     };
+    // console.log("newasdsadasda", newObj);
     this.create(newObj, userID);
     return await this.modelTypes.update(id, { deletedBy: userID, deletedAt: new Date() });
   }
@@ -56,5 +56,4 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     Object.assign(data , deletedAt);
     return this.modelTypes.find(data);
   }
-
 }

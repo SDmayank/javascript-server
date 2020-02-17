@@ -13,6 +13,7 @@ export default (moduleName, permissionType) => (req: IRequest, res: Response, ne
     const { authorization: token } = req.headers;
     const { secretKey } = configuration;
     const decodedUser = jwt.verify(token, secretKey);
+    console.log('decoder', decodedUser);
     if (!decodedUser) {
       return next(
         {
@@ -23,10 +24,11 @@ export default (moduleName, permissionType) => (req: IRequest, res: Response, ne
       );
     }
     const role: string = decodedUser.role;
-    const { id, email } = decodedUser;
-    Userrepository.findone({ _id: id, email })
+    const { _id, email } = decodedUser;
+    Userrepository.findone({ _id, email })
       .then(user => {
         req.user = user;
+        console.log('req user is' , req.user);
       }).
       catch( (error) =>  {
         return next({
