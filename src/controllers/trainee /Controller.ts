@@ -27,7 +27,6 @@ create = (req: Request , res: Response, next: NextFunction) => {
 
 list = (req: Request , res: Response , next: NextFunction) => {
     console.log('::::::::Added Trainee:::::::::::::::');
-   
     const Traineedata = {
         status: 'Done',
         message: 'Trainee Added Successfully',
