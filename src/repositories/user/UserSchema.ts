@@ -10,10 +10,10 @@ class UserSchema extends VersionableSchema {
       dob: Date,
       mobileNumber: Number,
       hobbies: [String],
-      role: String
+      role: String,
+      password: String
     };
     super(userSchema, options);
   }
 }
-
 export default UserSchema;

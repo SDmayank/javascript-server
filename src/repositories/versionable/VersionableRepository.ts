@@ -2,19 +2,15 @@ import * as mongoose from 'mongoose';
 
 export default class VersionableRepository<D extends mongoose.Document, M extends mongoose.Model<D>> {
   private modelTypes: M;
-
   constructor(modelType) {
     this.modelTypes = modelType;
   }
-
   public static generateObjectId() {
     return String(mongoose.Types.ObjectId());
   }
-
   public async count(): Promise<number> {
     return await this.modelTypes.countDocuments();
   }
-
   public async create(options, userID): Promise<D> {
     const id = VersionableRepository.generateObjectId();
     return await this.modelTypes.create({
@@ -24,13 +20,10 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
       createdBy: userID
     });
   }
-
   public async findOne(options): Promise<D> {
     return await this.modelTypes.findOne(options);
   }
-
   public async update(id, data, userID) {
-
     const user = await this.modelTypes.findById(id);
     console.log(typeof user);
     console.log(typeof data);
@@ -53,8 +46,7 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     const deletedAt = {
       deletedAt: undefined
     };
-    Object.assign(data , deletedAt);
+    Object.assign(data, deletedAt);
     return this.modelTypes.find(data);
   }
-
 }
