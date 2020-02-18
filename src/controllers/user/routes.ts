@@ -14,5 +14,4 @@ userRouter.route('/me')
   .get(authMiddleware('getUsers', 'read'), UserController.me);
 userRouter.route('/login')
   .post(authMiddleware('getUsers', 'read'), UserController.login);
-
 export default userRouter;

@@ -52,45 +52,45 @@ export const validation = {
       errorMessage: 'email is invalid',
     },
   },
-delete: {
-  id: {
-    required: true,
+  delete: {
+    id: {
+      required: true,
       errorMessage: 'Id is required',
       in: ['params'],
     }
-},
-get: {
-  skip: {
-    required: false,
+  },
+  get: {
+    skip: {
+      required: false,
       default: 0,
       number: true,
       in: ['query'],
       errorMessage: 'Skip is invalid',
     },
-  limit: {
-    required: false,
+    limit: {
+      required: false,
       default: 10,
       number: true,
       in: ['query'],
       errorMessage: 'Limit is invalid',
     }
-},
-update: {
-  id: {
-    required: true,
+  },
+  update: {
+    id: {
+      required: true,
       string: true,
       in: ['body']
-  },
-  dataToUpdate: {
+    },
+    dataToUpdate: {
       in: ['body'],
       required: true,
-        isObject: true,
-          custom: (dataToUpdate) => {
-              console.log('now you are in custom');
-              if (!dataToUpdate) {
-                console.log('now you are in custom');
-              }
-            }
-          }
+      isObject: true,
+      custom: (dataToUpdate) => {
+        console.log('now you are in custom');
+        if (!dataToUpdate) {
+          console.log('now you are in custom');
         }
-      };
+      }
+    }
+  }
+};
