@@ -12,7 +12,7 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
   }
 
   public async count(): Promise<number> {
-    return await this.modelTypes.countDocuments();
+    return await this.modelTypes.find({ deletedAt: undefined }).count();
   }
 
   public async create(options, userID): Promise<D> {
@@ -30,30 +30,29 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
   }
 
   public async update(id, data, userID) {
-    const user = await this.modelTypes.findById(id);
+    const user = await this.modelTypes.findOne(id);
     console.log(typeof user);
     console.log(typeof data);
+    const newid = VersionableRepository.generateObjectId();
     Object.assign(user, data);
     const newObj = {
       ...user.toObject(),
-      _id: id,
+      _id: newid,
       createdBy: userID,
       updatedAt: new Date(),
       updatedBy: userID
     };
-    // console.log("newasdsadasda", newObj);
-    this.create(newObj, userID);
+    this.modelTypes.create(newObj);
     return await this.modelTypes.update(id, { deletedBy: userID, deletedAt: new Date() });
   }
   public async delete(id, userID) {
     return await this.modelTypes.update(id, { deletedBy: userID, deletedAt: new Date() });
   }
 
-  public async list(data): Promise<any> {
-    const deletedAt = {
-      deletedAt: undefined
-    };
-    Object.assign(data , deletedAt);
-    return this.modelTypes.find(data);
+  public async list(data, limit, skip, sortData): Promise<any> {
+    if (sortData)
+      return this.modelTypes.find(data).limit(limit).skip(skip).sort(sortData);
+    else
+      return this.modelTypes.find(data).limit(limit).skip(skip).sort({ 'createdAt': 1 });
   }
 }
