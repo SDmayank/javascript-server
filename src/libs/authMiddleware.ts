@@ -28,9 +28,9 @@ export default (moduleName, permissionType) => (req: IRequest, res: Response, ne
     Userrepository.findone({ _id, email })
       .then(user => {
         req.user = user;
-        console.log('req user is' , req.user);
+        console.log('req user is', req.user);
       }).
-      catch( (error) =>  {
+      catch((error) => {
         return next({
           status: 404,
           error: 'invalid user',
