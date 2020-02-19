@@ -27,7 +27,6 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     const user = await this.modelTypes.findOne(originalid);
     console.log(typeof user);
     console.log(typeof data);
-    // const id = VersionableRepository.generateObjectId();
     Object.assign(user, data);
     const newObj = {
       ...user.toObject(),

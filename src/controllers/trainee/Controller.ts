@@ -20,7 +20,6 @@ class TraineeController {
       console.log('::::::::Create Trainee USER:::::::::::::::');
       const users: IUserCreate = req.body;
       console.log('USERS', users);
-      //  const { email, name, address, hobbies, dob, mobileNumber, role, password } = req.body;
       bcrypt.hash(users.password, 10, (err, hash) => {
         this.userRepository.create(users, req.user._id)
           .then(user => {
