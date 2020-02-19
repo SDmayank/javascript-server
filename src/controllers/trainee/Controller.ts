@@ -3,11 +3,11 @@ import UserRepository from '../../repositories/user/UserRepository';
 import SystemResponse from '../../libs/SystemResponse';
 import IRequest from '../../libs/routes/IRequest';
 import * as bcrypt from 'bcrypt';
+import IUserCreate from '../../../src/repositories/user/entities/IUserCreate';
 
 class TraineeController {
   static instance: TraineeController;
-  static userRepository: UserRepository;
-  userRepository = new UserRepository();
+  userRepository: UserRepository = new UserRepository();
   static getInstance = () => {
     if (TraineeController.instance) {
       return TraineeController.instance;
@@ -18,11 +18,11 @@ class TraineeController {
   create = async (req: IRequest, res: Response, next: NextFunction) => {
     try {
       console.log('::::::::Create Trainee USER:::::::::::::::');
-      const { email, name, address, hobbies, dob, mobileNumber, role, password } = req.body;
-      bcrypt.hash(password, 10, (err, hash) => {
-        this.userRepository.create({
-          email, name, address, dob, mobileNumber, hobbies, role, password: hash
-        }, req.user._id)
+      const users: IUserCreate = req.body;
+      console.log('USERS', users);
+      //  const { email, name, address, hobbies, dob, mobileNumber, role, password } = req.body;
+      bcrypt.hash(users.password, 10, (err, hash) => {
+        this.userRepository.create(users, req.user._id)
           .then(user => {
             return SystemResponse.success(res, user, 'trainee added sucessfully');
           }).catch(error => {
