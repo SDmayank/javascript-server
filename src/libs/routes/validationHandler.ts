@@ -37,10 +37,15 @@ export default (config) => {
           }
         }
         if (config[key].number) {
+          console.log('keyva;lue' , keyValue);
 
           if (isNaN(keyValue)) {
 
             return next({ error: 'error occured', message: `${key}` + 'is invalid' });
+          }
+          else 
+          {
+            req[reqMethod][key] = parseInt( keyValue, 10 );
           }
         }
         if (config[key].array) {
