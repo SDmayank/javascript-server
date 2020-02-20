@@ -2,7 +2,9 @@ import VersionableSchema from '../versionable/VersionableSchema';
 
 class UserSchema extends VersionableSchema {
   constructor(options) {
+
     const userSchema = {
+
       _id: String,
       name: String,
       address: String,
@@ -16,4 +18,5 @@ class UserSchema extends VersionableSchema {
     super(userSchema, options);
   }
 }
+
 export default UserSchema;

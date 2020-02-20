@@ -17,46 +17,6 @@ class UserController {
     UserController.instance = new UserController();
     return UserController.instance;
   }
-  create = async (req: IRequest, res: Response, next: NextFunction) => {
-    try {
-      console.log('::::::::Create Trainee USER:::::::::::::::');
-      const { email, name, address, hobbies, dob, mobileNumber, role, password } = req.body;
-      bcrypt.hash(password, 10, (err, hash) => {
-        this.userRepository.create({
-          email, name, address, dob, mobileNumber, hobbies, role, password: hash
-        }, req.user._id)
-          .then(user => {
-            return SystemResponse.success(res, user, 'trainee added sucessfully');
-          }).catch(error => {
-            throw error;
-          });
-      });
-    } catch (err) {
-      return next({ error: err, message: err });
-    }
-  }
-  list = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      console.log(' :::::::::: Inside List Trainee :::::::: ');
-      const user = await this.userRepository.list({ deletedAt: undefined });
-      console.log(user);
-      return SystemResponse.success(res, user, 'Users List');
-    }
-    catch (err) {
-      return next({ error: err, message: err });
-    }
-  }
-  update = async (req: IRequest, res: Response, next: NextFunction) => {
-    try {
-      console.log(' :::::::::: Inside Update Trainee :::::::: ');
-      const { id, dataToUpdate } = req.body;
-      const user = await this.userRepository.update({ _id: id }, dataToUpdate, req.user._id);
-      return SystemResponse.success(res, user, 'Updated user');
-    }
-    catch (err) {
-      return next({ error: err, message: err });
-    }
-  }
   me = (req: IRequest, res: Response, next: NextFunction) => {
     res.send(req.user);
   }
@@ -90,16 +50,5 @@ class UserController {
       });
     }
   }
-  delete = async (req: IRequest, res: Response, next: NextFunction) => {
-    try {
-      console.log(' :::::::::: Inside Delete Trainee :::::::: ');
-      const { id } = req.params;
-      const user = this.userRepository.delete({ _id: id }, req.user._id);
-      return SystemResponse.success(res, user, 'Users List');
-    }
-    catch (err) {
-      return next({ error: err, message: err });
-    }
-  };
 }
 export default UserController.getInstance();
