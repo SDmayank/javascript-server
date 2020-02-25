@@ -23,8 +23,8 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
   public async findOne(options): Promise<D> {
     return await this.modelTypes.findOne(options);
   }
-  public async update(originalid, data, userID) {
-    const user = await this.modelTypes.findOne(originalid);
+  public async update(condition, data, userID) {
+    const user = await this.modelTypes.findOne(condition);
     console.log(typeof user);
     console.log(typeof data);
     Object.assign(user, data);
@@ -34,19 +34,14 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
       updatedBy: userID
     };
     this.create(newObj, userID);
-    return await this.modelTypes.update(originalid, { deletedBy: userID, deletedAt: new Date() });
+    return await this.modelTypes.update(condition, { deletedBy: userID, deletedAt: new Date() });
   }
   public async delete(id, userID) {
     return await this.modelTypes.update(id, { deletedBy: userID, deletedAt: new Date() });
   }
 
-  public async list(data, limit, skip, sortData): Promise<any> {
-    if (sortData) {
-      console.log('sort', typeof sortData)
-      return this.modelTypes.find(data).limit(limit).skip(skip).sort({ sortData: 1 });
-    }
-    else {
-      return this.modelTypes.find(data).limit(limit).skip(skip).sort({ 'updatedAt': 1 });
-    }
+  public async list(limit, skip, sortData = 'createdAt', data = {deletedAt: undefined}): Promise<any> {
+      return this.modelTypes.find(data).limit(limit).skip(skip).sort(sortData);
+
   }
 }

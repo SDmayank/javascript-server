@@ -8,6 +8,8 @@ import { request } from 'http';
 import router from './router';
 import Database from './libs/Database';
 import configuration from './config/configuration';
+import * as swaggerJsDoc from 'swagger-jsdoc';
+import * as swaggerUI from 'swagger-ui-express';
 
 const { mongoUri } = configuration;
 class Server {
@@ -43,6 +45,7 @@ class Server {
     }
     setupRoutes() {
         const { app } = this;
+        app.use('/swagger', swaggerUI.serve, swaggerUI.setup(this.initSwagger()));
         this.app.get('/health-check', (req: express.Request, res: express.Response) => {
             res.send('Now app is running on the server');
         });
@@ -50,9 +53,33 @@ class Server {
             console.log(req.body);
             res.send('Your body parser is done');
         });
-        app.use('/api', router);
+        app.use('/api' , router);
         app.use(notFoundRoute);
         app.use(errorHandler);
     }
+
+    public initSwagger = () => {
+      const options = {
+      definition: {
+      info: {
+      title: 'Javascript-Server API',
+      version: '1.0.0',
+      },
+      securityDefinitions: {
+      Bearer: {
+      type: 'apiKey',
+      name: 'Authorization',
+      in: 'headers'
+      }
+      },
+      basePath: '/api',
+      },
+      swagger: '2.0',
+      apis: ['./dist/controllers/**/routes.js'],
+      };
+      const swaggerSpec = swaggerJsDoc(options);
+      return swaggerSpec;
+      }
+
 }
 export default Server;

@@ -24,19 +24,19 @@ export default (moduleName, permissionType) => (req: IRequest, res: Response, ne
       );
     }
     const role: string = decodedUser.role;
-    const { _id, email } = decodedUser;
-    Userrepository.findone({ _id, email })
+    const { originalid, email } = decodedUser;
+    Userrepository.findone({ originalid, email , deletedAt: undefined })
       .then(user => {
         req.user = user;
-        console.log('req user is', req.user);
-      }).
-      catch((error) => {
+     if(!user )
+      {
         return next({
           status: 404,
           error: 'invalid user',
           message: 'user not found',
         });
-      }).
+            }}).
+
       then(() => {
         if (!hasPermission(moduleName, role, permissionType)) {
           return next(

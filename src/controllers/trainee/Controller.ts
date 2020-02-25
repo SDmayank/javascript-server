@@ -20,14 +20,24 @@ class TraineeController {
       console.log('::::::::Create Trainee USER:::::::::::::::');
       const users: IUserCreate = req.body;
       console.log('USERS', users);
-      bcrypt.hash(users.password, 10, (err, hash) => {
-        this.userRepository.create(users, req.user._id)
-          .then(user => {
-            return SystemResponse.success(res, user, 'trainee added sucessfully');
-          }).catch(error => {
-            throw error;
-          });
-      });
+      const { email } = req.body;
+      const emailCovert = email.toLowerCase();
+      const emailChecker = await this.userRepository.findOne({email: emailCovert});
+      console.log('email', emailChecker);
+      if (emailChecker) {
+        return next ({
+          error: 'email already exist',
+          status: 400
+        });
+      }
+        bcrypt.hash(users.password, 10, (err, hash) => {
+          this.userRepository.create(users, req.user._id)
+            .then(user => {
+              return SystemResponse.success(res, user, 'trainee added sucessfully');
+            }).catch(error => {
+              throw error;
+            });
+        });
     } catch (err) {
       return next({ error: err, message: err });
     }
@@ -35,13 +45,20 @@ class TraineeController {
   list = async (req: Request, res: Response, next: NextFunction) => {
     try {
       console.log(' :::::::::: Inside List Trainee :::::::: ');
-      const { limit, skip, sortData } = req.query;
-      console.log('limit and skip', limit, skip);
-      const user = await this.userRepository.list({ deletedAt: undefined }, limit, skip, sortData);
-      console.log('user', user);
+      const { limit, skip, sortData , searchName , searchEmail} = req.query;
+      const search = {};
+      if (searchName) {
+        Object.assign(search, {name: searchName});
+      }
+      if (searchEmail) {
+        Object.assign(search, {email: searchEmail});
+      }
       const count = await this.userRepository.count();
-      return SystemResponse.success(res, { totalCount: count, ...user }, 'Users List');
-    }
+      console.log('limit and skip', limit, skip , sortData);
+     const user = await this.userRepository.list({role: 'trainee', deletedAt: undefined, ...search},  limit, skip, sortData);
+      console.log('user', user);
+      return SystemResponse.success(res, { totalCount: count , ...user  }, 'Users List');
+  }
     catch (err) {
       return next({ error: err, message: err });
     }
@@ -50,10 +67,15 @@ class TraineeController {
     try {
       console.log(' :::::::::: Inside Update Trainee :::::::: ');
       const { id, dataToUpdate } = req.body;
-      // console.log('req body' , req.body);
+      if (!dataToUpdate.email) {
       const user = await this.userRepository.update({ originalid: id, deletedAt: undefined }, dataToUpdate, req.user._id);
-      // console.log('user',user);
       return SystemResponse.success(res, user, 'Updated user');
+      } else {
+        return next({
+          error: 'error',
+          message: 'error'
+        });
+      }
     }
     catch (err) {
       return next({ error: err, message: err });
