@@ -135,6 +135,8 @@ traineeRouter.route('/')
  *                              example: Ok
  *                          message:
  *                              example: 'Trainee Listed Successfully'
+ *                          count:
+ *                              example: 2
  *                          data:
  *                              type: object
  *                              allOf[]:
