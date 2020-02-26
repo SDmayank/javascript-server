@@ -39,7 +39,7 @@ class UserController {
           status: 422
         });
       }
-      const token = jwt.sign({ email: user.email, _id: user.originalid, role: user.role }, config.secretKey);
+      const token = jwt.sign({ email: user.email, originalid: user.originalid, role: user.role }, config.secretKey, {expiresIn: '15m'});
       console.log(token);
       res.status(200).send({ message: 'Login Successfully', data: token, status: 'success' });
     }
