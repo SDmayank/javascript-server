@@ -5,7 +5,6 @@ import validationHandler from '../../libs/routes/validationHandler';
 import authmiddleware from '../../libs/authMiddleware';
 import UserRouter from '../user/routes';
 const traineeRouter = Router();
-//console.log(validation.create);
 traineeRouter.route('/')
  /**
   * @swagger
@@ -276,7 +275,7 @@ traineeRouter.route('/')
   *         password:
   *           type: string
   *           example: string
-  * 
+  *
   *     TraineeResponse:
   *       type: object
   *       properties:
@@ -348,7 +347,7 @@ traineeRouter.route('/')
   *             schema:
   *               $ref: '#/definitions/Unauthorized'
   */
-  .put(authmiddleware('getUsers', 'write'), validationHandler(validation.update), TraineeController.update)
+  .put(authmiddleware('getUsers', 'write'), validationHandler(validation.update), TraineeController.update);
  /**
   * @swagger
   *
