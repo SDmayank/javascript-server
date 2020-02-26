@@ -12,10 +12,10 @@ const userRouter = Router();
  *       properties:
  *          email:
  *             type: string
- *             example: vinay@successive.tech
+ *             example: string
  *          password:
  *             type: string
- *             example: mayank123
+ *             example: "******"
  *     Token:
  *       type: object
  *       properties:

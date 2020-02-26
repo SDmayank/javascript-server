@@ -31,6 +31,7 @@ class TraineeController {
         });
       }
         bcrypt.hash(users.password, 10, (err, hash) => {
+          users.password = hash;
           this.userRepository.create(users, req.user._id)
             .then(user => {
               return SystemResponse.success(res, user, 'trainee added sucessfully');
@@ -57,7 +58,7 @@ class TraineeController {
       console.log('limit and skip', limit, skip , sortData);
      const user = await this.userRepository.list({role: 'trainee', deletedAt: undefined, ...search},  limit, skip, sortData);
       console.log('user', user);
-      return SystemResponse.success(res, { totalCount: count , ...user  }, 'Users List');
+      return SystemResponse.success(res, { ...user   }, count, 'Users List');
   }
     catch (err) {
       return next({ error: err, message: err });

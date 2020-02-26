@@ -28,8 +28,7 @@ export default (moduleName, permissionType) => (req: IRequest, res: Response, ne
     Userrepository.findone({ originalid, email , deletedAt: undefined })
       .then(user => {
         req.user = user;
-     if(!user )
-      {
+     if (!user ) {
         return next({
           status: 404,
           error: 'invalid user',

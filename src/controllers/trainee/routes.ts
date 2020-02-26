@@ -13,28 +13,28 @@ const traineeRouter = Router();
  *      properties:
  *          name:
  *              type: string
- *              example: mayank garg
+ *              example: string
  *          address:
  *              type: string
- *              example: noida
+ *              example: string
  *          dob:
  *              type: Date
- *              example: 03/04/1998
+ *              example: timestamp
  *          email:
  *              type: string
- *              example: mayank@successive.tech
+ *              example: string
  *          mobileNumber:
  *              type: number
- *              example: 995813645
+ *              example: number
  *          password:
  *              type: string
- *              example: Trainer@123
+ *              example: "*******"
  *          role:
  *              type: string
- *              example: trainee
+ *              example: string
  *          hobbies:
  *              type: array
- *              example: ["cricket"]
+ *              example: array
  *
  *   TraineeResponse:
  *      type: object
@@ -43,31 +43,31 @@ const traineeRouter = Router();
  *              example: 5e53ac6060a36a15d89a3aa0
  *          name:
  *              type: string
- *              example: mayank
+ *              example: string
  *          address:
  *              type: string
  *              example: noida
  *          dob:
  *              type: Date
- *              example: 03/04/1998
+ *              example: Date
  *          email:
  *              type: string
- *              example: mayank@successive.tech
+ *              example: string
  *          mobileNumber:
  *              type: number
- *              example: 9958413545
+ *              example: number
  *          role:
  *              type: string
- *              example: trainee
+ *              example: string
  *          hobbies:
  *              type: array
- *              example: ["cricket"]
+ *              example: array
  *          originalId:
- *              example: 5e53ac6060a36a15d89a3aa0
+ *              example: string
  *          createdBy:
- *              example: 5e53ac6060a36a15d89a3aa0
+ *              example: string
  *          createdAt:
- *              example: 2020-02-24 10:58:40.385Z
+ *              example: timestamp
  *          v:
  *              example:0
  *          Unauthorized:
@@ -80,7 +80,7 @@ const traineeRouter = Router();
  *                  status:
  *                      example: 403
  *                  timestamp:
- *                      example: 2020-02-24 10:58:40.385Z
+ *                      example: timestamp
  *
  */
 
@@ -135,8 +135,6 @@ traineeRouter.route('/')
  *                              example: Ok
  *                          message:
  *                              example: 'Trainee Listed Successfully'
- *                          count:
- *                              example: 2
  *                          data:
  *                              type: object
  *                              allOf[]:
@@ -218,7 +216,7 @@ traineeRouter.route('/')
  *                  allOf[]:
  *                    properties:
  *                      id:
- *                        example: 5e53ac6060a36a15d89a3aa0
+ *                        example: string
  *                dataToUpdate:
  *                  type: object
  *                  allOf[]:
@@ -262,7 +260,7 @@ traineeRouter.route('/')
  *                in: path
  *                required: true
  *                type: string
- *                example: 5e53ac6060a36a15d89a3aa0
+ *                example: string
  *          responses:
  *              200:
  *                  description: Trainee deleted
@@ -274,7 +272,7 @@ traineeRouter.route('/')
  *                              message:
  *                                  example: Trainee deleted successfully
  *                              data:
- *                                  example: 5e53ac6060a36a15d89a3aa0
+ *                                  example: string
  *              403:
  *                  description: unauthorised access
  *                  schema:
