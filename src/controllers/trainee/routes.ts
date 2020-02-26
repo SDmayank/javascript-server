@@ -251,31 +251,15 @@ traineeRouter.route('/')
   *       properties:
   *         id:
   *           example: 5e4e6e93c095d84d34045a30
-  *         name:
-  *           type: string
-  *           example: string
-  *         address:
-  *           type: string
-  *           example: string
-  *         mobile_number:
-  *           type: number
-  *           example: number
-  *         role:
-  *           type: string
-  *           example: string
-  *         dob:
-  *           type: Date
-  *           example: string
-  *         hobbies:
-  *           type: array
-  *           example: [array]
-  *         email:
-  *           type: string
-  *           example: string
-  *         password:
-  *           type: string
-  *           example: string
-  *
+  *         dataToUpdate:
+  *           type: object
+  *           example:
+  *            name:: string
+  *            address: string
+  *            mobile_number: number
+  *            dob: date
+  *            email: string
+  *            role: string
   *     TraineeResponse:
   *       type: object
   *       properties:
