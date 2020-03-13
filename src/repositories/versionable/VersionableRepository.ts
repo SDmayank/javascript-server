@@ -25,14 +25,18 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
   }
   public async update(condition, data, userID) {
     const user = await this.modelTypes.findOne(condition);
-    console.log(typeof user);
+    console.log( user);
+    console.log( data);
     console.log(typeof data);
+    console.log('before assign',user);
     Object.assign(user, data);
+    console.log('after assign',user);
     const newObj = {
       ...user.toObject(),
       updatedAt: new Date(),
       updatedBy: userID
     };
+
     this.create(newObj, userID);
     return await this.modelTypes.update(condition, { deletedBy: userID, deletedAt: new Date() });
   }

@@ -4,6 +4,7 @@ import { validation } from './validation';
 import validationHandler from '../../libs/routes/validationHandler';
 import authmiddleware from '../../libs/authMiddleware';
 import UserRouter from '../user/routes';
+
 const traineeRouter = Router();
 traineeRouter.route('/')
  /**
@@ -108,7 +109,7 @@ traineeRouter.route('/')
   *           in: query
   *           required: false
   *           type: number
-  *         - name: sortBy
+  *         - name: sortData
   *           description: data to be sort by
   *           in: query
   *           required: false
@@ -140,7 +141,7 @@ traineeRouter.route('/')
   *           schema:
   *             $ref: '#/definitions/Unauthorized'
   */
-.get(authmiddleware('getUsers', 'write'), validationHandler(validation.get), TraineeController.list)
+.get(authmiddleware('getUsers', 'read'), validationHandler(validation.get), TraineeController.list)
  /**
   * @swagger
   * definitions:
@@ -404,6 +405,6 @@ traineeRouter.route('/')
  *           schema:
  *             $ref: '#/definitions/Unauthorized'
  */
- traineeRouter.delete('/trainee/:id', authmiddleware('getUsers', 'write'), validationHandler(validation.delete), TraineeController.delete);
+ traineeRouter.delete('/:id', authmiddleware('getUsers', 'write'), validationHandler(validation.delete), TraineeController.delete);
  export default traineeRouter;
 
